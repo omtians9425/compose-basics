@@ -2,7 +2,9 @@ package com.example.compose.basics
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -18,18 +20,28 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApp()
+            MyApp {
+                MyScreenContent()
+            }
         }
     }
 }
 
 @Composable
-fun MyApp() {
+fun MyApp(content: @Composable () -> Unit) {
     ComposebasicsTheme {
-        // A surface container using the 'background' color from the theme
-        Surface(color = MaterialTheme.colors.background) {
-            Greeting("Android")
+        Surface(color = Color.Yellow) {
+            content()
         }
+    }
+}
+
+@Composable
+fun MyScreenContent() {
+    Column {
+        Greeting(name = "Android")
+        Divider(color = Color.Black)
+        Greeting(name = "there")
     }
 }
 
@@ -44,6 +56,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     ComposebasicsTheme {
-        Greeting("Android")
+        MyScreenContent()
     }
 }

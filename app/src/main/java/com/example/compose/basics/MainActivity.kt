@@ -3,6 +3,7 @@ package com.example.compose.basics
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
@@ -41,13 +42,17 @@ fun MyApp(content: @Composable () -> Unit) {
 @Composable
 fun MyScreenContent(names: List<String> = listOf("Android", "there")) {
     val counterState = remember { mutableStateOf(0) }
-    Column {
-        names.forEach {
-            Greeting(it)
-            Divider(color = Color.Black)
+    Column(modifier = Modifier.fillMaxHeight()) {
+        Column(modifier = Modifier.weight(1f)) {
+            names.forEach {
+                Greeting(it)
+                Divider(color = Color.Black)
+            }
         }
-        Divider(color = Color.Transparent, thickness = 32.dp)
-        Counter(count = counterState.value, updateCount = { counterState.value++ })
+        Counter(
+            count = counterState.value,
+            updateCount = { counterState.value++ }
+        )
     }
 }
 

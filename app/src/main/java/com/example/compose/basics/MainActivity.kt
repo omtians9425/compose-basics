@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -37,11 +36,12 @@ fun MyApp(content: @Composable () -> Unit) {
 }
 
 @Composable
-fun MyScreenContent() {
+fun MyScreenContent(names: List<String> = listOf("Android", "there")) {
     Column {
-        Greeting(name = "Android")
-        Divider(color = Color.Black)
-        Greeting(name = "there")
+        names.forEach {
+            Greeting(it)
+            Divider(color = Color.Black)
+        }
     }
 }
 
